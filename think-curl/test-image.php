@@ -82,7 +82,7 @@ header("Content-type:text/html;charset=utf-8");
 
 $curl = lmxdawn\curl\Curl::getInstance();
 
-$html_data = $curl->send_http('http://www.cnblogs.com/freephp/p/4962591.html','get');
+$html_data = $curl->send_http('https://segmentfault.com/','get');
 
 //var_dump($html_data);
 
