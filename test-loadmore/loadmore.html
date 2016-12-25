@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>测试扩展《加载更多》</title>
+
+
+
+</head>
+<body>
+
+
+
+
+
+</body>
+  <script src="../jquery-1.7.min.js"></script>
+  <!--引入加载更多-->
+  <script src="loadmore.js"></script>
+
+
+  <script>
+
+      /**
+       * 加载更多
+      **/
+      var loadmore = function () {
+          var timerArr;
+          loadmore_mark = false;//更新加载标识
+          timerArr = $.loadmore.show($IdName,'正在加载','加载更多...');//显示
+          $.ajax({
+              url: '',
+              type: 'GET',
+              data: {},
+              success: function (json) {
+
+                  //加载完成，更新加载更多的标识
+                  loadmore_mark = true;
+                  // 加载完成清除定时，并且改变加载更多样式
+                  $.loadmore.hide(timerArr);//隐藏
+              },
+              error: function (e) {
+
+                  //加载完成，更新加载更多的标识
+                  loadmore_mark = true;
+                  $.loadmore.hide(timerArr);//隐藏
+              }
+          });
+
+      }
+
+      /**
+       * 滚动到底部，加载更多 （猜你喜欢）
+       * @type {boolean}
+       */
+      var loadmore_mark = true;//标识
+      $(window).scroll(function(){
+          totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+          if($(document).height() <= totalheight){
+              if(loadmore_mark == true){
+                  loadmore_mark = false;
+                  // 加载更多
+                  loadmore();
+
+              }
+          }
+      });
+  </script>
+
+
+</html>

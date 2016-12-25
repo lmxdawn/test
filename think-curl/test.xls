@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>php的curl封装类 - freephp - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=03KQeESEmpLfzDqUo0NiWUg5Zd5aRam3JHBZTK05Wug1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/CodingLife/bundle-CodingLife.css?v=s0uk-4nDGKcoZzCtu5RG1QHcsOLuk4tFWHoK2TgaeRE1"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/CodingLife/bundle-CodingLife-mobile.css?v=a_2SB-hDjFx2Wr5mbRw-7zcj_QJNoLHp_Viuz-EE1T01"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/freephp/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/freephp/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/freephp/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'freephp', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=hH1lCMV8WaIu271Nx7jPuv36TENW9-RsSxziLxUpjtc1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/freephp/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/freephp/">freephp</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/freephp/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/freephp">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/freephp/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/freephp/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 50&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 20</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/freephp/p/4962591.html">php的curl封装类</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>之前一直做爬虫相关的，每次自己去写一系列curl_setopt()函数太繁琐，我于是封装了如下curl请求类。</p>
+<div class="cnblogs_code">
+<pre>&lt;?<span style="color: #000000;">php
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">*
+ * @author freephp
+ * @date 2015-11-13
+ *
+ </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> MyCurl {    
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span>  <span style="color: #800080;">$url</span> = ''; <span style="color: #008000;">//</span><span style="color: #008000;"> 访问的url</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #800080;">$oriUrl</span> = ''; <span style="color: #008000;">//</span><span style="color: #008000;"> referer url</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #800080;">$data</span> = <span style="color: #0000ff;">array</span>(); <span style="color: #008000;">//</span><span style="color: #008000;"> 可能发出的数据 post,put</span>
+    <span style="color: #0000ff;">private</span>   <span style="color: #0000ff;">static</span> <span style="color: #800080;">$method</span>; <span style="color: #008000;">//</span><span style="color: #008000;"> 访问方式，默认是GET请求</span>
+    
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">function</span> send(<span style="color: #800080;">$url</span>, <span style="color: #800080;">$data</span> = <span style="color: #0000ff;">array</span>(), <span style="color: #800080;">$method</span> = 'get'<span style="color: #000000;">) {
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #800080;">$url</span>) <span style="color: #0000ff;">exit</span>('url can not be null'<span style="color: #000000;">);
+        self</span>::<span style="color: #800080;">$url</span> = <span style="color: #800080;">$url</span><span style="color: #000000;">;
+        self</span>::<span style="color: #800080;">$method</span> = <span style="color: #800080;">$method</span><span style="color: #000000;">;
+        </span><span style="color: #800080;">$urlArr</span> = <span style="color: #008080;">parse_url</span>(<span style="color: #800080;">$url</span><span style="color: #000000;">);
+        self</span>::<span style="color: #800080;">$oriUrl</span> = <span style="color: #800080;">$urlArr</span>['scheme'] .'://'. <span style="color: #800080;">$urlArr</span>['host'<span style="color: #000000;">];
+        self</span>::<span style="color: #800080;">$data</span> = <span style="color: #800080;">$data</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> ( !<span style="color: #008080;">in_array</span><span style="color: #000000;">(
+                self</span>::<span style="color: #800080;">$method</span>,
+                <span style="color: #0000ff;">array</span>('get', 'post', 'put', 'delete'<span style="color: #000000;">)
+             )
+           ) {
+                    </span><span style="color: #0000ff;">exit</span>('error request method type!'<span style="color: #000000;">);
+             }
+        
+                </span><span style="color: #800080;">$func</span> = self::<span style="color: #800080;">$method</span> . 'Request'<span style="color: #000000;">;
+                </span><span style="color: #0000ff;">return</span> self::<span style="color: #800080;">$func</span>(self::<span style="color: #800080;">$url</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #008000;">/*</span><span style="color: #008000;">*
+     * 基础发起curl请求函数
+     * @param int $is_post 是否是post请求
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span>  <span style="color: #0000ff;">function</span> doRequest(<span style="color: #800080;">$is_post</span> = 0<span style="color: #000000;">) {
+        </span><span style="color: #800080;">$ch</span> = curl_init();<span style="color: #008000;">//</span><span style="color: #008000;">初始化curl</span>
+        curl_setopt(<span style="color: #800080;">$ch</span>, CURLOPT_URL, self::<span style="color: #800080;">$url</span>);<span style="color: #008000;">//</span><span style="color: #008000;">抓取指定网页</span>
+        curl_setopt(<span style="color: #800080;">$ch</span>, CURLOPT_AUTOREFERER, <span style="color: #0000ff;">true</span><span style="color: #000000;">);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 来源一定要设置成来自本站</span>
+        curl_setopt(<span style="color: #800080;">$ch</span>, CURLOPT_REFERER, self::<span style="color: #800080;">$oriUrl</span><span style="color: #000000;">);
+        
+        curl_setopt(</span><span style="color: #800080;">$ch</span>, CURLOPT_RETURNTRANSFER, 1);<span style="color: #008000;">//</span><span style="color: #008000;">要求结果为字符串且输出到屏幕上</span>
+        <span style="color: #0000ff;">if</span>(<span style="color: #800080;">$is_post</span> == 1) curl_setopt(<span style="color: #800080;">$ch</span>, CURLOPT_POST, <span style="color: #800080;">$is_post</span>);<span style="color: #008000;">//</span><span style="color: #008000;">post提交方式</span>
+        <span style="color: #0000ff;">if</span> (!<span style="color: #0000ff;">empty</span>(self::<span style="color: #800080;">$data</span><span style="color: #000000;">)) {
+            self</span>::<span style="color: #800080;">$data</span> = self::dealPostData(self::<span style="color: #800080;">$data</span><span style="color: #000000;">);
+            curl_setopt(</span><span style="color: #800080;">$ch</span>, CURLOPT_POSTFIELDS, self::<span style="color: #800080;">$data</span><span style="color: #000000;">);
+        }
+        
+        </span><span style="color: #800080;">$data</span> = curl_exec(<span style="color: #800080;">$ch</span>);<span style="color: #008000;">//</span><span style="color: #008000;">运行curl    </span>
+        curl_close(<span style="color: #800080;">$ch</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">$data</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #008000;">/*</span><span style="color: #008000;">*
+     * 发起get请求
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">function</span><span style="color: #000000;"> getRequest() {
+        </span><span style="color: #0000ff;">return</span> self::doRequest(0<span style="color: #000000;">);
+    }
+    </span><span style="color: #008000;">/*</span><span style="color: #008000;">*
+     * 发起post请求
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">function</span><span style="color: #000000;"> postRequest() {
+        </span><span style="color: #0000ff;">return</span> self::doRequest(1<span style="color: #000000;">);
+    }
+    </span><span style="color: #008000;">/*</span><span style="color: #008000;">*
+     * 处理发起非get请求的传输数据
+     * 
+     * @param array $postData
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">function</span> dealPostData(<span style="color: #800080;">$postData</span><span style="color: #000000;">) {
+        </span><span style="color: #0000ff;">if</span> (!<span style="color: #008080;">is_array</span>(<span style="color: #800080;">$postData</span>)) <span style="color: #0000ff;">exit</span>('post data should be array'<span style="color: #000000;">);
+        </span><span style="color: #0000ff;">foreach</span> (<span style="color: #800080;">$postData</span> <span style="color: #0000ff;">as</span> <span style="color: #800080;">$k</span> =&gt; <span style="color: #800080;">$v</span><span style="color: #000000;">) {
+            </span><span style="color: #800080;">$o</span> .= "<span style="color: #800080;">$k</span>=" . <span style="color: #008080;">urlencode</span>(<span style="color: #800080;">$v</span>) . "&amp;"<span style="color: #000000;">;
+        }
+        </span><span style="color: #800080;">$postData</span> = <span style="color: #008080;">substr</span>(<span style="color: #800080;">$o</span>, 0, -1<span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">$postData</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #008000;">/*</span><span style="color: #008000;">*
+     * 发起put请求
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">function</span> putRequest(<span style="color: #800080;">$param</span><span style="color: #000000;">) {
+        </span><span style="color: #0000ff;">return</span> self::doRequest(2<span style="color: #000000;">);
+    }
+    
+    </span><span style="color: #008000;">/*</span><span style="color: #008000;">*
+     * 发起delete请求
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">function</span> deleteRequest(<span style="color: #800080;">$param</span><span style="color: #000000;">) {
+        </span><span style="color: #0000ff;">return</span> self::doRequest(3<span style="color: #000000;">);
+    }
+    
+}
+</span><span style="color: #008000;">/*</span><span style="color: #008000;"> $curl = new MyCurl('http://www.jumei.com',array(), 'get');
+$res = $curl-&gt;send(); </span><span style="color: #008000;">*/</span>
+<span style="color: #800080;">$res</span> = MyCurl::send('http://www.ipip.net/ip.html',<span style="color: #0000ff;">array</span>('ip' =&gt; '61.142.206.145'),'post'<span style="color: #000000;">);
+
+</span><span style="color: #008080;">var_dump</span>(<span style="color: #800080;">$res</span>);<span style="color: #0000ff;">die</span>();</pre>
+</div>
+<p>考虑到可能会有循环调用的可能和高并发，为了减少内存堆的不必要消耗，我只对客户端调用提供静态方法。为了类的单一职责，MyCurl只做发请求和返回data的作用，对返回数据的处理交给其他代码。</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2015-11-13 16:52</span> <a href='http://www.cnblogs.com/freephp/'>freephp</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=4962591" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(4962591);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=234276,cb_entryId=4962591,cb_blogApp=currentBlogApp,cb_blogUserGuid='9dc570f8-e123-e511-b908-9dcfd8948a71',cb_entryCreatedDate='2015/11/13 16:52:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='ad_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='ad_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2016 freephp
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

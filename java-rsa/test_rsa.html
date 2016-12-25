@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>测试RSA登录</title>
+</head>
+<body>
+
+
+<input id="pwd" type="text" />
+
+<div id="login">登录</div>
+
+
+
+<script src="BigInt.js"></script>
+<script src="Barrett.js"></script>
+<script src="RSA.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<!--<script src="./RSA/min/rsa.min.js"></script>-->
+<script src="min/md5.min.js"></script>
+
+<%
+  String rsa_n = (String)request.getAttribute("module");
+  String rsa_e = (String)request.getAttribute("empoent");
+%>
+
+<script>
+
+
+    //十六进制公钥
+    var rsa_n = "<%rsa_a%>",rsa_e = "<%rsa_e%>";
+
+
+    $(function () {
+        var key = null;
+        $("#login").click(function () {
+            var pwd = $("#pwd").val()
+            if(pwd == null||pwd==""){
+                alert("请填写密码");
+                return false;
+            }
+//            pwd = md5(pwd);
+            setMaxDigits(131); //131 => n的十六进制位数/2+3
+            key = new RSAKeyPair(rsa_e,"",rsa_n); //10001 => e的十六进制
+            result_pwd = window.btoa(encryptedString(key, pwd)); //不支持汉字 window.btoa 是base64转码
+            var str ="原始："+pwd+",加密后："+result_pwd;
+            console.log(str);
+            $.ajax({
+                type : 'post',
+                url : 'test_rsa.php',
+                data : {pwd : result_pwd},
+                success : function (res) {
+                    console.log(res);
+                }
+            })
+
+            return true;
+        });
+
+    });
+</script>
+
+
+</body>
+</html>

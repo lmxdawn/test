@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+
+
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="./jquery-1.7.min.js"></script>
+        <link rel="shortcut icon" href="./favicon.ico">
+
+    </head>
+    <body>
+        <button id="ajax">测试ajax跨域</button>
+
+        <div>
+
+
+        </div>
+
+        <script>
+            $(function () {
+                $("#ajax").click(function () {
+                    var _url = 'http://www.bbb.com/test.php?jsoncallback=?';
+                    //var _url = 'http://www.aaa.com/test.php?jsoncallback=?';
+                    $.ajax({
+                        type:'get',
+                        url:_url,
+                        dataType:'json',
+                        success : function(json){
+                            alert(json.name)
+                            console.log(json);
+                        },
+                        error : function(){
+                            console.log("失败");
+                        }
+                    });
+                    return false;
+                });
+
+            });
+
+        </script>
+
+    </body>
+</html>

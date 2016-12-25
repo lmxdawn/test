@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+  <title>JavaScript RSA Encryption</title>
+  <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+  <script src="bin/jsencrypt.min.js"></script>
+  <script src="bin/jquery.md5.min.js"></script>
+  <script type="text/javascript">
+
+      // Call this code when the page is done loading.
+      $(function() {
+
+          // Run a quick encryption/decryption when they click.
+          $('#testme').click(function() {
+
+              // Encrypt with the public key...
+              var encrypt = new JSEncrypt();
+              var pwd = md5($('#input').val());//MD5加密
+              encrypt.setPublicKey($('#pubkey').val());//设置公钥
+              var pu_encrypted = encrypt.encrypt(pwd);//公钥加密
+
+              console.log('初始MD5加密的密码：'+pwd);
+              console.log('公钥加密的内容：'+pu_encrypted);
+              $.ajax({
+                  type : 'post',
+                  url : 'test_rsa.php',
+                  data : {pu_pwd : pu_encrypted},
+                  success : function (res) {
+                      console.log(res);
+                  }
+              })
+
+              // Decrypt with the private key...
+              var decrypt = new JSEncrypt();
+              decrypt.setPrivateKey($('#privkey').val());//设置私钥
+              var uncrypted = decrypt.decrypt(pu_encrypted); //私钥解密
+
+              // Now a simple check to see if the round-trip worked.
+              if (uncrypted == pwd) {
+                  alert('It works!!!');//成功交换
+              }
+              else {
+                  alert('Something went wrong....');//失败
+              }
+          });
+      });
+  </script>
+</head>
+<body>
+<label for="privkey">Private Key</label><br/>
+<textarea id="privkey" rows="15" cols="65">-----BEGIN RSA PRIVATE KEY-----
+MIICXQIBAAKBgQC6l1VcRSMuF6DTV0gdCr0oeRgzURCnrwu9zB91lMZ44oaQtBQk
+wmBoaIibzM0on5B8mXxXlEzhyOoj2Ylaskh3quuYl2lU5VvkqBLJYZSFlJs9ByZQ
+G5+YhMkwRwzaCw67FJsD/bJTpARLAXJVBKdCj4Fro2y+w/5w6esf7h09CQIDAQAB
+AoGBAJ/ZJXd2gzzpYQ2sqEq4+HPDycesmugMPbLLO+gvHBhTd5RfsSIMoyrO4rkW
+KmuyxsT3eF5O3c5PoMY1hkX8lbb4XSCkXDm/Zwfv9b+3J7gv0Hrl+q2hYmtIqdMB
+vnLS5PtM3SB6kzuCZJk1NuedewEL7/4Rpxyaw0Jjo+ixBkJBAkEA3ppWbYd6TEEo
+wCwgITvNeTdvm/0GVEKNqgOcqdnVNKz8/lzMLMyaHG8Dq8fMPzKRhCY4EBCTi+P2
+mczWCcyT/wJBANaV3kf0P0vXXOLgridJ/DZ9XGGm0+apOQ7D/ci/N9O4RpPoEerH
+kQOImsAuKPYINr1cwsd/2hWYoWKxdMRdjvcCQDDd6slCq3tf9oUxaqBBE5tfqxWw
+VxpaPeUrw9GZq29T5nokfwH6rH4/dKvaQaFCBaXgCgCk0u8rzS/4QqiGC5sCQGqD
+BUxN7kUk5xQuVgNmc+xQGVTXTAMIKCwuGIBWec17gHzWCl6xJEfOvJF72BUXSqR/
+sKb5zTQ/CIxGbSEzF00CQQCcphnvT/zc7kMSCl5LhDA4Hf8TSoV5zrry8nemEhi8
+P6IPDOuyfn699kprL2UjknpdRFJ1/gDRTLALP6KJrmfy
+-----END RSA PRIVATE KEY-----</textarea><br/>
+<label for="pubkey">Public Key</label><br/>
+<textarea id="pubkey" rows="15" cols="65">-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6l1VcRSMuF6DTV0gdCr0oeRgz
+URCnrwu9zB91lMZ44oaQtBQkwmBoaIibzM0on5B8mXxXlEzhyOoj2Ylaskh3quuY
+l2lU5VvkqBLJYZSFlJs9ByZQG5+YhMkwRwzaCw67FJsD/bJTpARLAXJVBKdCj4Fr
+o2y+w/5w6esf7h09CQIDAQAB
+-----END PUBLIC KEY-----</textarea><br/>
+<label for="input">Text to encrypt:</label><br/>
+<textarea id="input" name="input" type="text" rows=4 cols=70>This is a test!</textarea><br/>
+<input id="testme" type="button" value="Test Me!!!" /><br/>
+</body>
+</html>

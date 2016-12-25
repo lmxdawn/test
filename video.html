@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="./jquery-1.7.min.js"></script>
+    </head>
+    <body>
+         <div class="gift-super-swf-box">
+            <object width="500" height="500" id="gift_super" type="application/x-shockwave-flash" data="" style="visibility: visible;">
+                <param name="wmode" value="transparent">
+                <param name="flashvars" value="">
+            </object>
+        </div>
+        
+
+        <script>
+            var data = "101_188.swf";
+            $(function(){
+                $("body").click(function(){
+                    $("#gift_super").attr("data",data); 
+                });
+            });
+        </script>
+        
+    </body>
+    
+</html>
