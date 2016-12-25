@@ -13,7 +13,7 @@
  * 把资源强制变为图片
  * Class TestImages
  */
-class TestImages{
+class WorldImages{
 
     private  $config = array(
 
@@ -56,68 +56,16 @@ class TestImages{
     /**
      * 保存为图片
      * @param $html 页面数据
-     * @param $image_name
+     * @param $name
      */
-    public function down_image($html,$image_name)
+    public function down($html,$name)
     {
-        $this->start();
-        $image_path ="./".$image_name.".xls";
-        echo $html;
+        $image_path ="./".$name.".doc";
         // 把文件写入磁盘
-        $this->save($image_path);
+        $this->wirtefile($image_path,$html);
 
-        ob_flush();
-        flush();
-
-        // 下载文件
-        $this->downFile($image_name.".xls",$image_path);
     }
 
-    /**
-     * php文件下载
-     * @param $file_name      下载文件名称
-     * @param $file_path     下载文件路径
-     * return void()
-     */
-    public function downFile($file_name, $file_path) {
-        header("Content-type:text/html;charset=utf-8");
-        $file_name = iconv("utf-8", "gb2312", $file_name);
-        //首先要判断给定的文件存在与否
-        if (file_exists($file_path)) {
-            $fp = fopen($file_path, "r");
-            $file_size = filesize($file_path);
-            //下载文件需要用到的头
-            Header("Content-type: application/octet-stream");
-            Header("Accept-Ranges: bytes");
-            Header("Accept-Length:" . $file_size);
-            Header("Content-Disposition: attachment; filename=" . $file_name);
-            $buffer = 1024;
-            $file_count = 0;
-            //向浏览器返回数据
-            while (!feof($fp) && $file_count < $file_size) {
-                $file_con = fread($fp, $buffer);
-                $file_count += $buffer;
-                echo $file_con;
-            }
-            fclose($fp);
-        } else {
-            echo '文件不存在';
-        }
-    }
-
-    // 页面缓存
-    private function start(){
-        ob_start();
-        ob_implicit_flush(0);
-    }
-
-    private function save($path){
-
-        // 获取并清空缓存
-        $content = ob_get_clean();
-        //echo $content;exit;
-        $this->wirtefile ($path,$content);
-    }
 
     private function wirtefile ($fn,$data){
         $fp=fopen($fn,"wb");
@@ -138,9 +86,9 @@ $html_data = $curl->send_http('http://www.cnblogs.com/freephp/p/4962591.html','g
 
 //var_dump($html_data);
 
-$image = TestImages::getInstance();
+$image = WorldImages::getInstance();
 
-$image->down_image($html_data,'test');
+$image->down($html_data,'test');
 
 
 
