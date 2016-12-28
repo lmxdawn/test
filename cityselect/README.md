@@ -1,8 +1,8 @@
 # 地区联动
 
 ```
-<script type="text/javascript" src="jquery.js"></script>  
-<script type="text/javascript" src="jquery.cityselect.js"></script>
+<script type="text/javascript" src="./js/jquery.js"></script>  
+<script type="text/javascript" src="./js/jquery.cityselect.js"></script>
 ```
 ##在#city区域里放三个下拉select，对应class为：prov、city、dist，分别表示省、市、区。若只想实现省市二级联动，去掉第三个dist的select就可以了。
 ```
