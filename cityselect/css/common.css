@@ -1,0 +1,81 @@
+html,body,div,span,h1,h2,h3,h4,h5,h6,p,pre,a,code,em,img,small,strong,sub,sup,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label{margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent}
+a{color:#007bc4; text-decoration:none; cursor:pointer;}
+.table_parameters a:hover{text-decoration: none}
+a:hover{text-decoration:underline}
+ol,ul{list-style:none}
+table{border-collapse:collapse; border-spacing:0}
+html{background:url(../images/demo_bg.png)}
+body{height:100%; font:12px/18px "Microsoft Yahei",Tahoma,Helvetica,Arial,Verdana,"\5b8b\4f53",sans-serif; color:#51555c}
+img{border:0; cursor:pointer;}
+.clearfix:after{visibility:hidden; display:block; font-size:0; content:" "; clear:both; height:0}
+.head{border-bottom:1px solid #dadada; padding:0 0 5px}
+.head_inner{margin:0 auto; width:980px}
+.container{width:980px; min-height:600px; margin:30px auto 0 auto; border:1px solid #d3d3d3; background:#fff; -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px; border-radius:5px}
+.demo>h2.title{margin:4px 0 30px; padding:15px 0 10px 20px; border-bottom:1px solid #d3d3d3; font-size:18px; color:#a84c10; background:url(../images/arrow.jpg) no-repeat 2px 14px}
+.foot{height:60px; padding:10px 2px; line-height:24px; text-align:center}
+.foot a:hover{color:#51555c}
+.btn{-webkit-border-radius:3px; -moz-border-radius:3px; -ms-border-radius:3px; -o-border-radius:3px; border-radius:3px; background-color:#ff8400; color:#fff; display:inline-block; height:28px; line-height:28px; text-align:center; padding:0 12px; transition:background-color .2s linear 0s; border:0; cursor:pointer}
+.btn:hover{background-color:#e95a00; text-decoration:none}
+.demo{width:700px; margin:0 auto}
+ul.ul_demo li{background:url("../images/demo_icon.gif") no-repeat scroll 0 6px; line-height:28px; padding-left:20px}
+.input,.table input[type='text']{border:1px solid #ccc; padding:0 5px; width:220px; height:26px; line-height:26px}
+#nav{float:right; margin:30px 0 0}
+#nav li{float:left; font-size:16px; margin-right:20px}
+.btn.loading{opacity:.5}
+h3 a.cur{color: #f30;}
+.demo h3 a{font-size: 14px; margin: 0 10px 5px 0; display: inline-block}
+.red{color:red}
+.notice{font-size: 14px; margin-bottom: 10px;}
+.table_parameters{border-left: 1px solid #d3d3d3; border-top: 1px solid #d3d3d3; margin: 6px auto; font-size: 14px}
+.table_parameters tr.tr_head{background: none repeat scroll 0 0 #f7f7f7; font-weight: bold; padding: 6px; text-align: center}
+.table_parameters td,.table_parameters th{border-bottom: 1px solid #d3d3d3; border-right: 1px solid #d3d3d3; line-height: 26px; padding: 2px}
+h1{font: 32px "Microsoft Yahei"; margin: 40px auto; text-align: center;}
+h2{font-size: 16px;margin:10px 0;}
+.menu{height: 30px; margin-bottom: 30px; padding: 10px; background-color: #f0f0f0; text-align: center;}
+.menu a{display: inline-block; height: 30px; padding: 0 20px; line-height: 30px; font-size: 14px; color: #333; text-decoration: none;}
+.menu a:hover{color: #000; background-color: #e9e9e9;}
+.menu .cur{background-color: #ddd !important; color: #000;}
+.vad{margin:80px 0 5px; font-family: arial,宋体,sans-serif; text-align:center;}
+.vad a{display:inline-block; height: 36px; line-height: 36px; margin:0 5px; padding:0 50px; font-size:14px; text-align:center; color:#eee; text-decoration:none; background-color:#222;}
+.vad a:hover{color:#fff; background-color:#000;}
+.thead{width: 728px; height: 90px; margin: 0 auto;}
+.wrap{width: 960px; margin: 0 auto; font: 14px Tahoma,Helvetica,Arial,"宋体";}
+.wrap p{margin: 14px 0; text-align: center;}
+.wrap h2{margin-bottom: 20px; padding: 5px 2px; border-bottom: 1px solid #ccc; font: 500 24px "Microsoft Yahei";}
+.wrap ul{margin-top: 20px; list-style-type: none; overflow: hidden; zoom: 1;}
+.wrap ul li{position: relative; float: left; width: 300px; margin: 0 10px 20px;}
+.wrap ul a{float: left; width: 300px; height: 60px; line-height: 60px; color: #333; text-align: center; text-decoration: none; background-color: #eee;}
+.wrap ul .downLink{position: absolute; right: 0; bottom: 0; width: auto; height: auto; padding: 5px 10px; line-height: normal; font-size: 12px; color: #666; background-color: #ddd;}
+.wrap ul .downLink:hover{color: #000;}
+.per{border-bottom: 1px dotted #ddd; padding: 20px 0}
+.per h3{margin-bottom: 6px; font-size: 14px}
+.per p{margin: 3px 0}
+.parea p{margin:12px 0; font-size: 14px}
+textarea{border: 1px solid #ccc; font-size: 12px; height: 100px; line-height: 18px; padding: 5px; width: 300px;}
+.table td{padding:10px 0}
+.error{color:red}
+.disabled{opacity:.6; filter:alpha(opacity=60)}
+.notice{font-weight: bold;font-size: 16px;}
+.demo>p{line-height: 30px;font-size: 14px}
+.demo>p a{font-size: 14px}
+.demo h3{font-size: 16px;margin:20px 0}
+select{background-color: #fff; background-position: right center; background-repeat: no-repeat; border: 1px solid #888; border-radius: 3px; box-sizing: border-box; font: 12px/1.5 Tahoma,Arial,sans-serif; height: 30px; padding: 0 4px;}
+fieldset{border: 1px solid #ccc; border-radius: 5px; margin: 1em 0; padding: 10px 20px;}
+dl.row dt{width: 2em;}
+dl.row dt{clear: left; float: left; line-height: 30px; padding: 5px; text-align: right; width: 6em;}
+dl.row dd{float: left; padding: 5px;}
+fieldset legend{font: bold 14px/2 "微软雅黑";}
+.pager{text-align:right;}
+.pager a{padding:3px 8px;margin-left:3px;line-height:20px;background:#f9f9f9;border:1px solid #DBDBDB;text-decoration: none}
+.pager a:hover,
+.pager a.current{background-color:#7CD5B1;color:#fff;border:1px solid #7CD5B1;cursor:pointer;}
+.page{text-align: center;margin:50px 0}
+.page a,.page span.prev_disabled{border: 1px solid #ededed; color: #3d3d3d; font-weight: 700; height: 35px; line-height: 35px; margin-left:5px; min-width: 9px; padding: 0 13px; text-align: center; text-decoration: none; vertical-align: top; font-family: "simsun";display: inline-block}
+.page span.prev_disabled{cursor: default;color:#ccc;margin:0 10px 0 0}
+.page a.current{background-color: #f40; border-color: #f40; color: #fff; font-weight: 700; position: relative; z-index: 1;}
+.page .extra{display: inline-block; margin-left: 10px; height: 35px; line-height: 35px; color: #656565;}
+.page .page-num{border: 1px solid #ededed; height: 21px; text-align: center; width: 35px; display: inline-block}
+.page .page-submit{background-clip: padding-box; border: 1px solid #ededed; border-radius: 2px; cursor: pointer; height: 21px; line-height: 21px; text-align: center; width: 43px; display: inline-block}
+.page .page-submit:hover{border-color: #f40; color: #f40;}
+.page a:focus, .page a:hover{border-color: #f40; z-index: 1;}
+.loading{margin:30px 0;text-align: center}
