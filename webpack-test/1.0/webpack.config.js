@@ -28,7 +28,7 @@ module.exports = {
         }),
         new ExtractTextPlugin('[name].css'),
 
-        new CompressionWebpackPlugin({ //gzip 压缩
+        new CompressionWebpackPlugin({ //gzip 压    缩
             asset: '[path].gz[query]',
             algorithm: 'gzip',
             test: new RegExp(
