@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "compression-webpack-plugin": "^0.3.2",
     "css-loader": "^0.26.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
