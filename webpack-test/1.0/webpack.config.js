@@ -1,6 +1,10 @@
 var webpack = require('webpack');
 
+// css 剥离 js 文件, 将 css 单独打包。
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+// gzip 压缩
+var CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = {
     entry: './entry.js',
@@ -10,7 +14,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            {test: /\.css$/, loader: 'style!css'}
+            {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader")}
         ]
     },
     plugins: [
@@ -22,11 +26,16 @@ module.exports = {
                 warnings: false
             }
         }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-            },
-        }),
-        new ExtractTextPlugin("bundle.css")
+        new ExtractTextPlugin('[name].css'),
+
+        new CompressionWebpackPlugin({ //gzip 压缩
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: new RegExp(
+                '\\.(js|css)$'    //压缩 js 与 css
+            ),
+            threshold: 10240,
+            minRatio: 0.8
+        })
     ],
 }

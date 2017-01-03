@@ -2,7 +2,7 @@
 
 require("./css/style.css");
 
-document.write("hello webpack!");
+document.write("hello webpack!sdfsdfadfdsfsdfa");
 
 document.write("");
 
