@@ -1,5 +1,7 @@
 var webpack = require('webpack');
 
+var path = require('path');
+
 // css 剥离 js 文件, 将 css 单独打包。
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
@@ -9,7 +11,7 @@ var CompressionWebpackPlugin = require('compression-webpack-plugin');
 module.exports = {
     entry: './entry.js',
     output: {
-        path: __dirname,
+        path: path.resolve("./dist"),//__dirname
         filename: 'bundle.js'
     },
     module: {

@@ -1,0 +1,286 @@
+
+$text_color: #232323;
+
+body{
+    font-size: 36px;
+    background-color: $text_color;
+    line-height: 40px;
+    lighting-color: black;
+
+}
+
+$column_layout: 2;
+
+.column {
+    @if $column_layout == 2 {
+        width: 50%;
+        float: left;
+    }   @else {
+        width: 100%;
+    }
+}
+
+div{
+    background-color: yellow;
+    
+}
+
+a {
+    display: flex;
+}
+
+.loading{
+    width: 100px;
+    height: 100px;
+    background-image: url("../images/loading-jd.gif");
+}
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}div{
+     background-color: yellow;
+ }
+
+div a{
+    font-size: 30px;
+}
+
+a{
+    float: left;
+}
+
+a{
+    font-size: 40px;
+}
