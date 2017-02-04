@@ -61,8 +61,141 @@ $end = date("Y-m-d H:i:s",mktime(0,0,0,date('m'),date('d'),date('Y'))+1);
 //echo  $_SERVER['DOCUMENT_ROOT'];
 
 
-$param = ['id'=>1];
-$command = preg_replace('/\{(\w*?)\}/', '$param[\'\\1\']', '{id} == 1');
-@(eval('$condition=(' . $command . ');'));
+//$param = ['id'=>1];
+//$command = preg_replace('/\{(\w*?)\}/', '$param[\'\\1\']', '{id} == 1');
+//@(eval('$condition=(' . $command . ');'));
+//
+//var_dump($condition);
 
-var_dump($condition);
+//$units = array();
+//for($i=0;$i<1000000;$i++){
+//    $units[] = uniqid();
+//}
+//$values  = array_count_values($units);
+//$duplicates = [];
+//foreach($values as $k=>$v){
+//    if($v>1){
+//        $duplicates[$k]=$v;
+//    }
+//}
+//echo '<pre>';
+//print_r($duplicates);
+//echo '</pre>';
+
+
+
+
+
+
+
+//$units = array();
+//for($i=0;$i<1000000;$i++){
+//    $units[] = uniqid('',true);
+//}
+//$values  = array_count_values($units);
+//$duplicates = [];
+//foreach($values as $k=>$v){
+//    if($v>1){
+//        $duplicates[$k]=$v;
+//    }
+//}
+//echo '<pre>';
+//print_r($duplicates);
+//echo '</pre>';
+
+
+
+//echo md5(uniqid(md5(microtime(true)),true));exit;
+
+//$units = array();
+//for($i=0;$i<1000000;$i++){
+//    $units[]=md5(uniqid(md5(microtime(true)),true));
+//}
+//$values  = array_count_values($units);
+//$duplicates = [];
+//foreach($values as $k=>$v){
+//    if($v>1){
+//        $duplicates[$k]=$v;
+//    }
+//}
+//echo '<pre>';
+//print_r($duplicates);
+//echo '</pre>';
+
+
+
+abstract class A{
+
+    // 实例
+    protected static $instance;
+    //参数配置
+    protected $options = [];
+
+
+}
+
+class B extends A {
+
+    /**
+     * 架构函数
+     * @param array $options 缓存参数
+     * @access public
+     */
+    private function __construct($options = []) {
+
+        if (!empty($options) && is_array($options)){
+            $this->options = array_merge($this->options,$options);
+        }
+    }
+
+    // 私有化克隆方法
+    private function __clone() {}
+
+
+    /**
+     * 返回实例
+     * @param array $options
+     * @return Qq
+     */
+    public static function getInstance($options = []) {
+        if (is_null(self::$instance)) {
+            self::$instance = new self($options);
+        }
+        return self::$instance;
+    }
+
+    public function show(){
+        echo 123;
+    }
+}
+
+$B = B::getInstance();
+$B->show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
