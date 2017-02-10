@@ -12,20 +12,39 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <script src="./jquery-1.7.min.js"></script>
-        <link rel="shortcut icon" href="./favicon.ico">
+        <script src="../jquery-1.7.min.js"></script>
+        <link rel="shortcut icon" href="../favicon.ico">
 
     </head>
     <body>
         <button id="ajax">测试ajax跨域</button>
 
         <div>
-
+            <input  type="file" onchange="upload(this)" placeholder="">
 
         </div>
 
         <script>
+
+
+            function upload(obj) {
+                var file = obj.files[0];
+                var reader = new FileReader();
+
+                reader.onloadend = function () {
+                    // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
+                    var dataURL = reader.result;
+                    var img = new Image();
+                    img.src = dataURL;
+                    // 插入到 DOM 中预览
+                    // ...
+                };
+                reader.readAsDataURL(file); // 读出 base64
+            }
+
             $(function () {
+
+
                 $("#ajax").click(function () {
                     var _url = 'http://www.bbb.com/test.php?jsoncallback=?';
                     //var _url = 'http://www.aaa.com/test.php?jsoncallback=?';

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width" name="viewport">
+
+  <title>iOS下的 Fixed + Input 调用键盘的时候fixed无效问题解决方案</title>
+
+  <style>
+    a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+      margin: 0;
+      padding: 0;
+    }
+    header, footer, main {
+      display: block;
+    }
+
+    header {
+      position: absolute;
+      height: 50px;
+      left: 0;
+      right: 0;
+      top: 0;
+      background-color: red;
+    }
+
+    footer {
+      position: absolute;
+      height: 34px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: deepskyblue;
+      width: 100%;
+      display: table;
+    }
+
+    main{
+      top: 50px;
+      bottom: 34px;
+      /* main绝对定位，进行内部滚动 */
+      position: absolute;
+      /* 使之可以滚动 */
+      overflow-y: auto;
+      /* 增加该属性，可以增加弹性，是滑动更加顺畅 */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tbl-cell {
+      display: table-cell;
+      vertical-align: top;
+    }
+  </style>
+
+</head>
+
+<body class="layout-fixed" style="background-color: #7CD5B1;">
+
+<!-- fixed定位的头部 -->
+<header>
+
+</header>
+
+<!-- 可以滚动的区域 -->
+<main>
+  <!-- 内容在这里... -->
+  <ul style="height: 1000px;">
+    <li>123456</li>
+    <li>123456</li>
+    <li>123456</li>
+    <li>123456</li>
+    <li>123456</li>
+    <li>123456</li>
+    <li>123456</li>
+    <li>123456</li>
+  </ul>
+
+</main>
+
+<!-- fixed定位的底部 -->
+<footer>
+
+  <span class="tbl-cell">
+      <input type="text" style="height: 100%;width: 100%;" placeholder="Footer..."/>
+  </span>
+
+  <span class="tbl-cell" style="width: 200px;">
+      <a style="height: 34px;line-height: 34px; width: 100%;text-align: center;background-color: #00AA00;display: inline-block;">提交</a>
+  </span>
+</footer>
+
+</body>
+</html>

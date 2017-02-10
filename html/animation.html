@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=1" >
+  <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <title>首页加载动画</title>
+  <head>
+    <style>
+      .welcome-main{
+        display: none;
+        padding-bottom: 40px;
+      }
+      .top-info{
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 93px;
+      }
+      .wec-img{
+        width: 175px;
+        height: 175px;
+        position: relative;
+        padding: 23px;
+        box-sizing: border-box;
+        margin: 0 auto;
+      }
+      .wec-img:before{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        /*background: url("./images/kf-welcome-loading.png");*/
+        background-size: 100%;
+      }
+      .wec-img .img-con{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        /*box-sizing: border-box;*/
+        background: url("./2_Flat_logo_on_transparent.png");
+        background-size: 100%;
+        padding: 1px;
+      }
+      .wec-img .img-con img{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+      .loaded .wec-img{
+        -webkit-transform-origin: center top;
+      }
+      .loading.welcome-main{
+        display: block;
+      }
+      .loading .wec-img{
+        -webkit-animation:fadeIn .3s  ease both;
+      }
+      .loading .wec-img:before{
+        -webkit-animation:rotate .6s .2s linear both;
+      }
+      .loaded .top-info{
+        -webkit-animation:mainpadding 1s 0s ease both;
+      }
+      .loaded .wec-img{
+        -webkit-animation:imgSmall 1s 0s ease both;
+      }
+      @-webkit-keyframes mainpadding{
+        0%{
+          -webkit-transform:translateY(0)
+        }
+        100%{
+          -webkit-transform:translateY(-87px)
+        }
+      }
+      @-webkit-keyframes imgSmall{
+        0%{
+          -webkit-transform: scale(1);
+        }
+        100%{
+          -webkit-transform: scale(0.5);
+
+        }
+      }
+      @-webkit-keyframes fadeIn{
+        0%{opacity:0;-webkit-transform:scale(.3)}
+        100%{opacity:1;-webkit-transform:scale(1)}
+      }
+      @-webkit-keyframes rotate{
+        0%{opacity:0;-webkit-transform:rotate(0deg);}
+        50%{opacity:1;-webkit-transform:rotate(180deg);}
+        100%{opacity:0;-webkit-transform:rotate(360deg);}
+      }
+    </style>
+<body>
+<div class="welcome-main">
+  <div class="top-info">
+    <div class="wec-img"><p class="img-con"><img src="" alt=""></p></div>
+  </div>
+</div>
+<script>
+    $('.welcome-main').addClass('loading');
+    setTimeout(function(){
+        $('.hi.fst').removeClass('loading');
+        $('.welcome-main').addClass('loaded');
+    },700);
+
+</script>
+</body>
+</html>
