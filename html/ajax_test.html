@@ -36,7 +36,35 @@ and open the template in the editor.
                     var dataURL = reader.result;
                     var img = new Image();
                     img.src = dataURL;
+
+                    var width = 200,
+                        height = 200,
+                        canvas = document.createElement("canvas"),
+                        dim = 0,
+                        size = dataURL.length,
+                        dx = parseInt(dim) - width / 2 + width / 2,
+                        dy = parseInt(dim) - height / 2 + height / 2,
+                        dw = parseInt(100),
+                        dh = parseInt(size),
+                        sh = parseInt(height),
+                        sw = parseInt(width);
+
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    img.width = width
+                    img.height = height;
+
+                    var context = canvas.getContext("2d");
+                    context.drawImage(img, 0, 0, sw, sh, dx, dy, dw, dh);
+                    var imageData = canvas.toDataURL('image/png');
+
+                    console.log(imageData);
+
+                    img.src = imageData;
+
                     // 插入到 DOM 中预览
+                    document.body.appendChild(img);
                     // ...
                 };
                 reader.readAsDataURL(file); // 读出 base64
