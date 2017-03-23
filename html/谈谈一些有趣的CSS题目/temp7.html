@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟渐变动画</title>
+
+    <style>
+        h4{
+            width: 300px;
+            margin: 0 auto;
+        }
+        div{
+            margin: 10px auto;
+            width: 300px;
+            height: 100px;
+        }
+        
+        .div1{
+            background: yellow;
+            -webkit-animation:gradientChange 2s infinite linear alternate;
+            -o-animation:gradientChange 2s infinite linear alternate;
+            animation:gradientChange 2s infinite linear alternate;
+        }
+        @keyframes gradientChange  {
+            100%{
+                background: red;
+            }
+        }
+
+        .div2{
+            background: linear-gradient(90deg, #ffc700 0%, #e91e1e 50%, #6f27b0 100%) 0 0;
+            background-size: 200% 100%;
+            -webkit-animation:bgposition 2s infinite linear alternate;
+            -o-animation:bgposition 2s infinite linear alternate;
+            animation:bgposition 2s infinite linear alternate;
+        }
+        @keyframes bgposition {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 100% 0;
+            }
+        }
+
+
+        .div3{
+            background: linear-gradient(90deg, #ffc700 0%, #e91e1e 50%, #6f27b0 100%) 100% 0;
+            -webkit-animation:bgSize 5s infinite linear alternate;
+            -o-animation:bgSize 5s infinite linear alternate;
+            animation:bgSize 5s infinite linear alternate;
+        }
+
+        @keyframes bgSize {
+            0%{
+                background-size: 300% 100%;
+            }
+            100%{
+                background-size: 100% 100%;
+            }
+        }
+
+
+        .div4{
+            overflow: hidden;
+            position: relative;
+        }
+        .div4::before{
+            content: "";
+            position: absolute;
+            top:-100%;
+            left: -100%;
+            bottom: -100%;
+            right: -100%;
+            background: linear-gradient(90deg, #ffc700 0%, #e91e1e 50%, #6f27b0 100%);
+            background-size: 100% 100%;
+            -webkit-animation:bgTransform 8s infinite linear alternate;
+            -o-animation:bgTransform 8s infinite linear alternate;
+            animation:bgTransform 8s infinite linear alternate;
+        }
+
+        @keyframes bgTransform {
+            0%{
+                -webkit-transform: translate(30%,30%);
+                -moz-transform: translate(30%,30%);
+                -ms-transform: translate(30%,30%);
+                -o-transform: translate(30%,30%);
+                transform: translate(30%,30%);
+            }
+            25%{
+                -webkit-transform: translate(-30%,30%);
+                -moz-transform: translate(-30%,30%);
+                -ms-transform: translate(-30%,30%);
+                -o-transform: translate(-30%,30%);
+                transform: translate(-30%,30%);
+            }
+            50%{
+                -webkit-transform: translate(-30%,-30%);
+                -moz-transform: translate(-30%,-30%);
+                -ms-transform: translate(-30%,-30%);
+                -o-transform: translate(-30%,-30%);
+                transform: translate(-30%,-30%);
+            }
+            75%{
+                -webkit-transform: translate(30%,-30%);
+                -moz-transform: translate(30%,-30%);
+                -ms-transform: translate(30%,-30%);
+                -o-transform: translate(30%,-30%);
+                transform: translate(30%,-30%);
+            }
+            100%{
+                -webkit-transform: translate(30%,30%);
+                -moz-transform: translate(30%,30%);
+                -ms-transform: translate(30%,30%);
+                -o-transform: translate(30%,30%);
+                transform: translate(30%,30%);
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+    <h4>通过 background 模拟渐变动画</h4>
+    <div class="div1"></div>
+
+    <h4>通过 background-position 模拟渐变动画</h4>
+    <div class="div2"></div>
+
+    <h4>通过 background-size 模拟渐变动画</h4>
+    <div class="div3"></div>
+
+    <h4>通过 transform 模拟渐变动画</h4>
+    <div class="div4"></div>
+
+
+</body>
+</html>

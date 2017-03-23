@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全兼容的多列均匀布局问题</title>
+    <style>
+        .justify{
+            width: 100%;
+            background-color: #ddd;
+            /*overflow: hidden;*/
+            height: 24px;
+        }
+
+        .justify i{
+            width: 24px;
+            line-height: 24px;
+            display: inline-block;
+            text-align: center;
+            border-radius: 50%;
+            background-color: #000000;
+            color: #fff;
+        }
+        .container1 .justify{
+            text-align: justify;
+        }
+        .container1 .justify::after{
+            content: "";
+            display: inline-block;
+            width: 100%;
+        }
+
+
+        .container2 .justify{
+            /*width: 300px;*/
+            flex-wrap:wrap;
+            display: flex;
+        }
+        .container2 .justify i{
+            flex: 1;
+        }
+
+
+    </style>
+</head>
+<body>
+
+justify模式
+<div class="container1">
+    <div class="justify">
+        <i style="width: 100px;">1</i>
+        <i>2</i>
+        <i>3</i>
+        <i>4</i>
+        <i>5</i>
+    </div>
+</div>
+
+<hr/>
+
+flex模式
+<div class="container2">
+    <div class="justify">
+        <i style="flex-grow:2">1</i>
+        <i>2</i>
+        <i>3</i>
+        <i>4</i>
+        <i>5</i>
+        <i>5</i>
+        <i>5</i>
+        <i style="flex-grow:1.5">5</i>
+        <i>5</i>
+        <i>5</i>
+        <i>5</i>
+        <i>5</i>
+        <i>5</i>
+        <i>5</i>
+        <i>5</i>
+        <i>5</i>
+    </div>
+</div>
+
+</body>
+</html>

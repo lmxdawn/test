@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>要求每行中最后一列的右边框消失，如何在所有浏览器中最便捷优雅的实现？</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,ol{
+            list-style: outside none none;
+        }
+        ul{
+            width: 300px;
+            margin-left:-1px;
+        }
+
+        li{
+            float:left;
+            width:99px;
+            line-height:30px;
+            text-align:center;
+            border-left:1px solid #999;
+            font-size:18px;
+            margin-bottom:10px;
+        }
+
+        .ul-container{
+            width: 300px;
+            margin: 50px auto;
+            overflow:hidden;
+            background: #eee;
+            padding:10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ul-container">
+        <ul>
+            <li>测试</li>
+            <li>消失</li>
+            <li>边界线</li>
+            <li>右侧</li>
+            <li>边界线</li>
+            <li>消失</li>
+            <li>测试</li>
+        </ul>
+    </div>
+
+</body>
+</html>

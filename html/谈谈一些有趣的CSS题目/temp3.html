@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>层叠顺序（stacking level）与堆栈上下文（stacking context）知多少？</title>
+
+    <style>
+
+        .container{
+            position: relative;
+            background: #ddd;
+        }
+
+        .container div{
+            width: 200px;
+            height: 200px;
+        }
+
+        .float{
+            float: left;
+            background-color: deeppink;
+        }
+
+        .inline-block{
+            display: inline-block;
+            background-color: yellowgreen;
+            margin-left: -100px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="inline-block">#divA display:inline-block</div>
+        <div class="float"> #divB float:left</div>
+    </div>
+
+
+</body>
+</html>

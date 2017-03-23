@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        *,*::after,*::before{
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        div{
+            width: 200px;
+            height: 60px;
+            background: #ddd;
+            line-height: 60px;
+            text-align: center;
+            margin: 10px auto;
+        }
+
+        .div1{
+            border-left: 5px solid red;
+        }
+
+        .div2{
+            position: relative;
+        }
+        .div2::after{
+            content: '';
+            width: 5px;
+            height: 60px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: red;
+        }
+        
+        .div3{
+            -webkit-box-shadow: -5px 0 0 0 red;
+            -moz-box-shadow: -5px 0 0 0 red;
+            box-shadow: -5px 0 0 0 red;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="div1">
+        <span>border 形式</span>
+    </div>
+
+    <div class="div2">
+        <span>伪元素</span>
+    </div>
+
+    <div class="div3">
+        <span>box-shadow</span>
+    </div>
+
+
+</body>
+</html>

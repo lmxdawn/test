@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>从倒影说起，谈谈 CSS 继承 inherit</title>
+
+    <style>
+
+        div{
+            background-image: url("../images/lan.png");
+            width: 180px;
+            height: 180px;
+        }
+
+        .div1{
+            -webkit-box-reflect: below;
+        }
+
+        .div2{
+            position: relative;
+        }
+        .div2::after{
+            content: "";
+            position: absolute;
+            top:100%;
+            left:0;
+            right: 0;
+            bottom: -100%;
+            background-image: inherit;
+            -webkit-transform: rotateX(180deg);
+            -moz-transform: rotateX(180deg);
+            -ms-transform: rotateX(180deg);
+            -o-transform: rotateX(180deg);
+            transform: rotateX(180deg);
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!--只支持-webkit- 内核-->
+    <div class="div1"></div>
+
+    <hr/>
+
+    <div class="div2"></div>
+
+</body>
+</html>
