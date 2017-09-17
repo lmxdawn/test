@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打开APP</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+</head>
+<body>
+
+    <a id="bu" href="">打开APP</a>
+
+    <script src="./2.js"></script>
+
+    <script>
+        var isIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false,
+            titlePrefix = "得到 | ",
+            mlinkConfig = {
+                live : {
+                    url : "https://apvsxy.mlinks.cc/AAN1",
+                    param : "room_id"
+                },
+                column : {
+                    url : "https://apvsxy.mlinks.cc/AAE8",
+                    param : "column_id"
+                },
+                freecolumn : {//免费专栏文稿
+                    url : "https://apvsxy.mlinks.cc/AK8K",
+                    param : "id"
+                },
+                freeColumn : {//免费专栏首页
+                    url : "https://apvsxy.mlinks.cc/AcTE",
+                    param : "freeId"
+                },
+                subject : {
+                    url : "https://apvsxy.mlinks.cc/AANC",
+                    param : "sid"
+                },
+                themeDetail : { // 跳转到每天听本书主题书单
+                    url : "https://apvsxy.mlinks.cc/A016",
+                    param : "themeId"
+                },
+                audio : {
+                    url : "https://apvsxy.mlinks.cc/AAFb",
+                    param : ""
+                },
+                book : {
+                    url : "https://apvsxy.mlinks.cc/AANh",
+                    param : "bookId"
+                },
+                topic : {
+                    url : "https://apvsxy.mlinks.cc/AANZ",
+                    param : "audioId"
+                },
+                storytelling : {
+                    url : "https://apvsxy.mlinks.cc/AAxB",
+                    param : "saydetail_id"
+                },
+                magazine: {
+                    url: "https://apvsxy.mlinks.cc/Aa0T",
+                    param: "magazine"
+                }
+            };
+
+        if(isIOS){
+            new Mlink({
+                mlink : "https://apvsxy.mlinks.cc/AAB7?page=freecolumn&key=freecolumn&val=Fctlyt6zwyVEePUXjYou", //在魔窗后台配置好的短链URL
+                button : document.querySelector("a#bu"), //必须是A标签
+                autoRedirect : false//尝试自动打开在魔窗后台配置的mlink中的App
+            });
+        }else{
+            var product = mlinkConfig["freecolumn"] || mlinkConfig["column"];
+            new Mlink({
+                mlink : product.url+"?"+product.param+"=Fctlyt6zwyVEePUXjYou", //在魔窗后台配置好的短链URL
+                button : document.querySelector("a#bu"), //必须是A标签
+                autoRedirect : false//尝试自动打开在魔窗后台配置的mlink中的App
+            });
+        }
+
+        // 绑定事件
+        function bind(dom, event, fun) { // bind event
+            if (dom.addEventListener) {
+                dom.addEventListener(event, fun, !1)
+            }else if (dom.attachEvent){
+                dom.attachEvent(event, fun)
+            }else{
+                throw new Error('不存在的方法')
+            }
+        }
+
+
+    </script>
+
+</body>
+</html>
