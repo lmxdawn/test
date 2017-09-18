@@ -7,12 +7,14 @@
     var ifAndroid = (Navigator.match(/(Android);?[\s\/]+([\d.]+)?/)) ? true : false;
     var ifiPad = (Navigator.match(/(iPad).*OS\s([\d_]+)/)) ? true : false;
     var ifiPhone = (!ifiPad && Navigator.match(/(iPhone\sOS)\s([\d_]+)/)) ? true : false;
-    var ifIos = (ifiPhone || ifiPad);
+    var ifIos = Navigator.match(/iPhone|iPad|iPd/i) ? true : false;
     var ifSafari = ifIos && Navigator.match(/Safari/);
-    var safariVersion = 0
-    ifSafari && (safariVersion = Navigator.match(/Version\/([\d\.]+)/)[1]);
-    safariVersion = parseFloat(safariVersion, 10);
-
+    // ios 设备的版本号
+    var iosVersion = Navigator.match(/OS\s*(\d+)/)
+    iosVersion = iosVersion ? (iosVersion[1] || 0) : 0;
+    // 安卓版本号
+    var androidVersion = Navigator.match(/Android\s*(\d+)/)
+    androidVersion = androidVersion ? (androidVersion[1] || 0) : 0;
 
     // 是否从微信打开
     var ifWeixin = navigator.userAgent.indexOf("MicroMessenger") >= 0; // weixin
@@ -30,60 +32,36 @@
     }
 
     // 打开APP
-    function openApp(option) {
+    function openApp(option,isAutoLaunchApp) {
 
         var openLink = null,
             downloadUrl = null;
         if (ifIos){
             openLink = option.iosLink || null
-            downloadUrl = option.iosDownloadUrl || null
+            // 开启应用宝跳转
+            downloadUrl = (option.iosYyb || false) ? (option.yybDownloadUrl || null) : (option.iosDownloadUrl || null)
         }else if (ifAndroid){
             openLink = option.androidLink || null
-            downloadUrl = option.androidDownloadUrl || null
+            // 开启应用宝跳转
+            downloadUrl = (option.androidYyb || false) ? (option.yybDownloadUrl || null) : (option.androidDownloadUrl || null)
         }
-
         var params = option.params || []
         openLink = formatUrl(openLink,params) //格式化url 加参数
-
-        //在浏览器打开，判断是在移动端还是在PC端
-        var matchVersion,locationApp = false,deviceVersion
-        if(matchVersion = Navigator.match(/OS\s*(\d+)/)){
-            //IOS设备的浏览器
-            deviceVersion = matchVersion[1] || 0;
-            deviceVersion >= 9 && (locationApp = true);
-        }else if(matchVersion = Navigator.match(/Android\s*(\d+)/)){
-            //Android的设备
-            deviceVersion = matchVersion[1] || 0;
-            deviceVersion >= 5 && (locationApp = true);
+        // android5 及以上的高版本
+        if (ifAndroid && androidVersion >= 5) {
+            // 延后50毫秒
+            setTimeout(function() {
+                // 如果为自动跳转直接用应用宝链接
+                if (isAutoLaunchApp) openLink = (option.yybDownloadUrl || null);
+                location.href = openLink
+            }, 50)
 
         }
-
-        if(ifiPhone && ifWeixin){
-            var ifr = document.querySelector("#" + iframe);
-            ifr.src = openLink // 将iframe增加src
-        }
-
-        // if (ifChrome) { // 如果是chrome
-        //     if (ifAndroid) { //安卓浏览器
-        //         // 延后50毫秒
-        //         setTimeout(function() {
-        //             window.location.href = openLink
-        //         }, 0)
-        //     }
-        // }else
-        document.location.href = downloadUrl;
-        location.href = openLink;
-        location.reload();
-        return
-        if (locationApp){
-
-            // location.href = openLink;
-            // setTimeout(function() {
-            //     location.href = downloadUrl;
-            // }, 250);
-            // setTimeout(function() {
-            //     location.reload();
-            // }, 1000);
+        // 设备是ios9 及以上的版本
+        if (ifIos && iosVersion >= 9){
+            // 如果是自动跳转或者未开启Universal Link 用之前的链接 否则用 Universal Link
+            var iosUniversalLinkEnabled = (option.iosUniversalLinkEnabled || false) ? false : true
+            openLink = isAutoLaunchApp || iosUniversalLinkEnabled ? openLink : (option.ios9Link || null)
             setTimeout(function() {  // 必须要使用settimeout
                 var a = document.createElement("a"); //创建a元素
                 a.setAttribute("href", openLink), a.style.display = "none", document.body.appendChild(a);
@@ -91,17 +69,16 @@
                 t.initEvent("click", !1, !1) // 初始化新事件对象的属性
                     ,a.dispatchEvent(t)  // 绑定事件
             }, 0)
+            // 如果是自动跳转 则直接返回
+            if (isAutoLaunchApp) return
         }else {
+            document.querySelector("#" + iframe).src = openLink // 将iframe增加src
         }
-
-        var ifr = document.querySelector("#" + iframe);
-        ifr.src = openLink // 将iframe增加src
-        // ios9 和 Android5 以前的版本
         //使用计算时差的方案打开APP
         var checkOpen = function (cb){
             var _clickTime = +(new Date());
             function check(elsTime) {
-                if ( elsTime > 3000 || document.hidden || document.webkitHidden) {
+                if ( elsTime >= 2000 || document.hidden || document.webkitHidden) {
                     cb(1);
                 } else {
                     cb(0);
@@ -120,7 +97,8 @@
         }
 
         checkOpen(function(opened){
-            if(opened === 0){
+            // APP没有打开成功  并且开启自动跳转到下载页
+            if(opened === 0 && option.autoRedirectToDownloadUrl){
                 location.href = downloadUrl;
             }
         });
@@ -162,8 +140,13 @@
                     isIfr = true
                 }
                 // 打开APP
-                openApp(option)
+                openApp(option,false)
             })
+        }
+        // 如果开启自动打开
+        if (option.autoLaunchApp){
+            // 打开APP
+            openApp(option,true)
         }
 
     }

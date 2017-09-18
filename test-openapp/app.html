@@ -10,20 +10,22 @@
     <a id="bu" href="">打开APP</a>
 
 
-    <script type="text/javascript" src="js/link.js?222000"></script>
+    <script type="text/javascript" src="js/link.js?v=102"></script>
 
     <script>
         new Link({
-            button: document.querySelector("a#bu"),
-            androidLink: "igetapp://m.iget.dev.didatrip.com/free_audio?id=Fctlyt6zwyVEePUXjYou",
-            androidDownloadUrl: "http://a.app.qq.com/o/simple.jsp?pkgname=com.luojilab.player&ckey=CK1369314671247",
-            androidYyb: true,
-            iosLink: "igetapp://m.iget.dev.didatrip.com/share/freecolumn/freecolumn/Fctlyt6zwyVEePUXjYou",
-            iosDownloadUrl: "http://a.app.qq.com/o/simple.jsp?pkgname=com.luojilab.player&ckey=CK1369314671247",
-            iosUniversalLinkEnabled: true,
-            iosYyb: true,
-            jumpType: "DOWNLOAD",
-            yybDownloadUrl: "http://a.app.qq.com/o/simple.jsp?pkgname=com.luojilab.player&ckey=CK1369314671247"
+            button: document.querySelector("a#bu"),// 按钮
+            androidLink: "igetapp://m.iget.dev.didatrip.com/free_audio?id=Fctlyt6zwyVEePUXjYou",// 安卓的打开链接
+            androidDownloadUrl: "http://a.app.qq.com/o/simple.jsp?pkgname=com.luojilab.player&ckey=CK1369314671247",// 安卓的下载链接
+            androidYyb: true,// android 是否开启应用宝下载
+            iosLink: "igetapp://m.iget.dev.didatrip.com/share/freecolumn/freecolumn/Fctlyt6zwyVEePUXjYou",// ios 打开链接
+            ios9Link: "https://s.mlinks.cc/SWUU0C8E/AABD?page=freecolumn&key=freecolumn&val=egEfCr6HnhBWHVbf0ywT",// ios 的Universal Link
+            iosDownloadUrl: "http://a.app.qq.com/o/simple.jsp?pkgname=com.luojilab.player&ckey=CK1369314671247", // ios 的下载链接
+            iosUniversalLinkEnabled: true, // 是否开启 Universal Link
+            iosYyb: true,// ios 是否开启应用宝下载
+            yybDownloadUrl: "http://a.app.qq.com/o/simple.jsp?pkgname=com.luojilab.player&ckey=CK1369314671247",// 应用宝下载链接
+            autoLaunchApp: false, // 是否打开页面就唤起APP
+            autoRedirectToDownloadUrl: true,// 是否自动跳转到下载页面
         })
     </script>
 
