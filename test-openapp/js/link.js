@@ -20,7 +20,6 @@
     var ifWeixin = navigator.userAgent.indexOf("MicroMessenger") >= 0; // weixin
     var iframe = "plugIn_downloadAppPlugIn_loadIframe";
     var isIfr = false;
-    var button = null
     // 绑定事件
     function bind(dom, event, fun) { // bind event
         if (dom.addEventListener) {
@@ -128,7 +127,6 @@
     // 初始化
     function init(option) {
         if (option.button){
-            button = option.button
             option.button.setAttribute('href','javascript:void(0)')
             bind(option.button, 'click', function () {
                 if (!isIfr){
@@ -140,10 +138,6 @@
                     document.getElementById(iframe).style.height = "0px";
                     isIfr = true
                 }
-                // if (button){
-                //     document.body.removeChild(button)
-                //     document.body.appendChild(button)
-                // }
                 // 打开APP
                 openApp(option,false)
             })
