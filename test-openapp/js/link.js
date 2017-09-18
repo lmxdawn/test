@@ -20,6 +20,7 @@
     var ifWeixin = navigator.userAgent.indexOf("MicroMessenger") >= 0; // weixin
     var iframe = "plugIn_downloadAppPlugIn_loadIframe";
     var isIfr = false;
+    var button = null
     // 绑定事件
     function bind(dom, event, fun) { // bind event
         if (dom.addEventListener) {
@@ -67,7 +68,7 @@
                 a.setAttribute("href", openLink), a.style.display = "none", document.body.appendChild(a);
                 var t = document.createEvent("HTMLEvents"); // 返回新创建的 Event 对象，具有指定的类型。
                 t.initEvent("click", !1, !1) // 初始化新事件对象的属性
-                    ,a.dispatchEvent(t)  // 绑定事件
+                a.dispatchEvent(t)  // 绑定事件
             }, 0)
             // 如果是自动跳转 则直接返回
             if (isAutoLaunchApp) return
@@ -78,7 +79,7 @@
         var checkOpen = function (cb){
             var _clickTime = +(new Date());
             function check(elsTime) {
-                if ( elsTime >= 2000 || document.hidden || document.webkitHidden) {
+                if ( elsTime > 3000 || document.hidden || document.webkitHidden) {
                     cb(1);
                 } else {
                     cb(0);
@@ -95,7 +96,6 @@
                 }
             }, 20);
         }
-
         checkOpen(function(opened){
             // APP没有打开成功  并且开启自动跳转到下载页
             if(opened === 0 && option.autoRedirectToDownloadUrl){
@@ -128,6 +128,7 @@
     // 初始化
     function init(option) {
         if (option.button){
+            button = option.button
             option.button.setAttribute('href','javascript:void(0)')
             bind(option.button, 'click', function () {
                 if (!isIfr){
@@ -139,6 +140,10 @@
                     document.getElementById(iframe).style.height = "0px";
                     isIfr = true
                 }
+                // if (button){
+                //     document.body.removeChild(button)
+                //     document.body.appendChild(button)
+                // }
                 // 打开APP
                 openApp(option,false)
             })
