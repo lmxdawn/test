@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS实现border的0.5px设置</title>
+
+    <style>
+        .custom-border{
+            width:200px;
+            margin:10px auto;
+            height:100px;
+            border:1px solid #333;
+            background-color:#eee;
+            padding:10px;
+        }
+        .scale-border{
+            margin:10px auto;
+            height:100px;
+            position:relative;
+            padding:10px;
+            width: 200px;
+        }
+        .scale-border:before{
+            content: "";
+            border: 1px solid #d6e4ed;
+            border-radius: 10px;
+            bottom: -50%;
+            left: -50%;
+            position: absolute;
+            right: -50%;
+            top: -50%;
+            transform: scale(0.5);
+            -webkit-transform: scale(0.5);
+        }
+        .border{
+            -webkit-transform:scale(0.5);
+            transform:scale(0.5);
+            position:absolute;
+            border:1px solid #333;
+            top:-50%;
+            right:-50%;
+            bottom:-50%;
+            left:-50%;
+            border-radius: 10px;
+            background-color:#eee;
+        }
+        .content{
+            position:relative;
+            z-index:2;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="custom-border border-color">边框宽度1px</div>
+    <div class="scale-border">
+        <div class="content">边框宽度0.5px</div>
+        <!--<div class="border border-color"></div>-->
+    </div>
+
+</body>
+</html>
