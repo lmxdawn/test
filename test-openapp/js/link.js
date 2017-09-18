@@ -71,7 +71,10 @@
         //         }, 0)
         //     }
         // }else
+        document.location.href = downloadUrl;
         location.href = openLink;
+        location.reload();
+        return
         if (locationApp){
 
             // location.href = openLink;
@@ -89,10 +92,10 @@
                     ,a.dispatchEvent(t)  // 绑定事件
             }, 0)
         }else {
-            var ifr = document.querySelector("#" + iframe);
-            ifr.src = openLink // 将iframe增加src
         }
 
+        var ifr = document.querySelector("#" + iframe);
+        ifr.src = openLink // 将iframe增加src
         // ios9 和 Android5 以前的版本
         //使用计算时差的方案打开APP
         var checkOpen = function (cb){

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打开APP 测试</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+</head>
+<body>
+
+
+
+    <a id="bu" href="javascript:void(0)" onclick="lclick()">打开APP</a>
+
+    <script>
+        var url_ios = 'igetapp://m.iget.dev.didatrip.com/share/freecolumn/freecolumn/Fctlyt6zwyVEePUXjYou';
+            var url_ios_download= 'http://a.app.qq.com/o/simple.jsp?pkgname=com.luojilab.player&ckey=CK1369314671247';
+            var url_android = 'vread://com.sina.book.xxx';
+        var url_android_download = 'http://www.xxx.com';
+        //通过window.navigator.userAgent来判断当前设备是IOS还是Android。
+        var Navigator = navigator.userAgent;
+        var ifiPad = (Navigator.match(/(iPad).*OS\s([\d_]+)/)) ? true : false;
+        var ifiPhone = (!ifiPad && Navigator.match(/(iPhone\sOS)\s([\d_]+)/)) ? true : false;
+        var ifIos = (ifiPhone || ifiPad);
+
+        //
+        function lclick() { //
+            if (ifIos){
+                var loadTime = new Date();
+                location.href = url_ios;
+                setTimeout(function(){
+                    var outTime = new Date()
+                    if(outTime - loadTime > 800){
+                        location.href = url_ios_download;
+                    }
+                },1000)
+            }else{
+                var loadTime = new Date();
+                location.href = url_android;
+                setTimeout(function(){
+                    var outTime = new Date()
+                    if(outTime - loadTime > 800){
+                        location.href = android_download;
+                    }
+                },1000)
+            }
+        }
+
+
+
+    </script>
+
+</body>
+</html>
