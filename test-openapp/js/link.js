@@ -17,7 +17,7 @@
     androidVersion = androidVersion ? (androidVersion[1] || 0) : 0;
 
     // 是否从微信打开
-    var ifWeixin = navigator.userAgent.indexOf("MicroMessenger") >= 0; // weixin
+    var ifWeixin = Navigator.indexOf("MicroMessenger") >= 0; // weixin
     var iframe = "plugIn_downloadAppPlugIn_loadIframe";
     var isIfr = false;
     // 绑定事件
@@ -69,15 +69,15 @@
             //     t.initEvent("click", !1, !1) // 初始化新事件对象的属性
             //     a.dispatchEvent(t)  // 绑定事件
             // }, 0)
-            location.href = openLink;
+            document.location.href = openLink;
             // 不是 Safari 浏览器才跳转下载链接
             if (!ifSafari){
                 setTimeout(function () {
-                    location.href = downloadUrl;
+                    document.location.href = downloadUrl;
                 }, 100)
             }
             setTimeout(function () {
-                location.reload();
+                document.location.reload();
             }, 1000)
             // 如果是自动跳转 则直接返回
             if (isAutoLaunchApp) return
