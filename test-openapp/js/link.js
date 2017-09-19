@@ -62,13 +62,23 @@
             // 如果是自动跳转或者未开启Universal Link 用之前的链接 否则用 Universal Link
             var iosUniversalLinkEnabled = (option.iosUniversalLinkEnabled || false) ? false : true
             openLink = isAutoLaunchApp || iosUniversalLinkEnabled ? openLink : (option.ios9Link || null)
-            setTimeout(function() {  // 必须要使用settimeout
-                var a = document.createElement("a"); //创建a元素
-                a.setAttribute("href", openLink), a.style.display = "none", document.body.appendChild(a);
-                var t = document.createEvent("HTMLEvents"); // 返回新创建的 Event 对象，具有指定的类型。
-                t.initEvent("click", !1, !1) // 初始化新事件对象的属性
-                a.dispatchEvent(t)  // 绑定事件
-            }, 0)
+            // setTimeout(function() {  // 必须要使用settimeout
+            //     var a = document.createElement("a"); //创建a元素
+            //     a.setAttribute("href", openLink), a.style.display = "none", document.body.appendChild(a);
+            //     var t = document.createEvent("HTMLEvents"); // 返回新创建的 Event 对象，具有指定的类型。
+            //     t.initEvent("click", !1, !1) // 初始化新事件对象的属性
+            //     a.dispatchEvent(t)  // 绑定事件
+            // }, 0)
+            location.href = openLink;
+            // 不是 Safari 浏览器才跳转下载链接
+            if (!ifSafari){
+                setTimeout(function () {
+                    location.href = downloadUrl;
+                }, 100)
+            }
+            setTimeout(function () {
+                location.reload();
+            }, 1000)
             // 如果是自动跳转 则直接返回
             if (isAutoLaunchApp) return
         }else {
