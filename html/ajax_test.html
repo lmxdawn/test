@@ -22,12 +22,133 @@ and open the template in the editor.
         <div>
             <input  type="file" onchange="upload(this)" placeholder="">
 
+            <img src="http://userimg.yingyonghui.com/head/24/1458708838143/5426424.png-thumb" alt="" id="xxx">
         </div>
 
         <script>
 
+            /**
+             * 生成图片的缩略图
+             * @param  {[type]} img    图片(img)对象或地址
+             * @param  {[type]} width  缩略图宽
+             * @param  {[type]} height 缩略图高
+             * @return {[type]}        return base64 png图片字符串
+             */
+            function thumb_image(img, width, height) {
+                if (typeof img !== 'object') {
+                    var tem = new Image();
+                    tem.src = img;
+                    img = tem;
+                }
+                var _canv = document.createElement('canvas');
+                _canv.width = width;
+                _canv.height = height;
+                _canv.getContext("2d").drawImage(img, 0, 0, img.width, img.height, 0, 0, width, height);
+                return _canv.toDataURL();
+            }
 
-            function upload(obj) {
+            /**
+             * 把图片处理成圆形,如果不是正方形就按最小边一半为半径处理
+             * @param  {[type]} img 图片(img)对象或地址
+             * @return {[type]}     return base64 png图片字符串
+             */
+            function yuan_image(img) {
+                if (typeof img !== 'object') {
+                    var tem = new Image();
+                    tem.src = img;
+                    img = tem;
+                }
+                var w, h, _canv, _contex, cli;
+                if (img.width > img.height) {
+                    w = img.height;
+                    h = img.height;
+                } else {
+                    w = img.width;
+                    h = img.width;
+                }
+                _canv = document.createElement('canvas');
+                _canv.width = w;
+                _canv.height = h;
+                _contex = _canv.getContext("2d");
+                cli = {
+                    x: w / 2,
+                    y: h / 2,
+                    r: w / 2
+                };
+                _contex.clearRect(0, 0, w, h);
+                _contex.save();
+                _contex.beginPath();
+                _contex.arc(cli.x, cli.y, cli.r, 0, Math.PI * 2, false);
+                _contex.clip();
+                _contex.drawImage(img, 0, 0);
+                _contex.restore();
+                var ba = _canv.toDataURL()
+                return ba;
+            }
+
+            upload('s')
+            function upload(s) {
+                var canvas = document.createElement("canvas")
+                var context = canvas.getContext("2d");
+                canvas.width = 256;
+                canvas.height = 256;
+
+                var dataURL = 'http://userimg.yingyonghui.com/head/24/1458708838143/5426424.png-thumb'
+                var width = 200,
+                    height = 200,
+                    dim = 0,
+                    size = dataURL.length,
+                    dx = parseInt(dim) - width / 2 + width / 2,
+                    dy = parseInt(dim) - height / 2 + height / 2,
+                    dw = parseInt(100),
+                    dh = parseInt(size),
+                    sh = parseInt(height),
+                    sw = parseInt(width);
+                var image = new Image();
+                image.width = width
+                image.height = height;
+                // 引用外部图片，需设置 crossOrigin 属性，否则 toDataURL 调用异常
+                image.setAttribute('crossOrigin', 'anonymous');
+                image.onload = function (){
+                    var cli = {
+                        x: width / 2,
+                        y: height / 2,
+                        r: width / 2
+                    };
+                    context.save();
+                    context.beginPath();
+                    context.arc(cli.x, cli.y, cli.r, 0, Math.PI * 2, false);
+                    context.clip();
+                    context.drawImage(image, 0, 0);
+//                    context.restore();
+                    context.font = '16px Arial';
+                    context.fillStyle = '#000';
+                    context.fillText('水印文本 - 火影忍者', 0, 245);
+                    context.font = '20px Arial';
+                    context.fillStyle = '#eee';
+                    context.fillText('水印文本 - 火影忍者', 0, 100);
+                    context.beginPath();
+                    //context.lineWidth = 10;
+                    context.strokeStyle = '#ff5900';
+                    context.moveTo(0, 0);
+                    context.lineTo(256, 0);
+                    context.lineTo(256, 256);
+                    context.lineTo(0, 256);
+                    context.lineTo(0, 0);
+                    context.stroke();
+                    // 最终生成的图片 base64 字符串
+                    var base64Image = canvas.toDataURL();
+//                    var base64Image = yuan_image(image);
+                    document.getElementById('xxx').src = base64Image;
+                    console.log(base64Image);
+                };
+                image.className = 'ss'
+                // 将 src 换成 base64 字符串
+                image.src = dataURL;
+            }
+
+
+            function upload1(obj) {
                 var file = obj.files[0];
                 var reader = new FileReader();
 
@@ -57,14 +178,15 @@ and open the template in the editor.
 
                     var context = canvas.getContext("2d");
                     context.drawImage(img, 0, 0, sw, sh, dx, dy, dw, dh);
-                    var imageData = canvas.toDataURL('image/png');
-
-                    console.log(imageData);
-
-                    img.src = imageData;
-
-                    // 插入到 DOM 中预览
-                    document.body.appendChild(img);
+                    context.font = '16px Arial';
+                    context.fillStyle = '#fff';
+                    context.fillText('水印文本 - 火影忍者', 0, 245);
+                    context.font = '20px Arial';
+                    context.fillStyle = '#eee';
+                    context.fillText('水印文本 - 火影忍者', 0, 100);
+                    context.beginPath();
+                    var base64Image = canvas.toDataURL();
+                    document.getElementById('xxx').src = base64Image;
                     // ...
                 };
                 reader.readAsDataURL(file); // 读出 base64
