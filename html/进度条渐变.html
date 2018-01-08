@@ -2,57 +2,74 @@
 <html lang="cmn-hans">
 <head>
     <meta charset="utf-8">
-    <title>进度条</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <script>!function(e,t){function n(){t.body?t.body.style.fontSize=12*o+"px":t.addEventListener("DOMContentLoaded",n)}function d(){var e=i.clientWidth/10;i.style.fontSize=e+"px"}var i=t.documentElement,o=e.devicePixelRatio||1;if(n(),d(),e.addEventListener("resize",d),e.addEventListener("pageshow",function(e){e.persisted&&d()}),o>=2){var a=t.createElement("body"),s=t.createElement("div");s.style.border=".5px solid transparent",a.appendChild(s),i.appendChild(a),1===s.offsetHeight&&i.classList.add("hairlines"),i.removeChild(a)}}(window,document);</script>
+    <title>进度条渐变</title>
     <style type="text/css">
-        .bar{
-            position: relative;
-            width: 400px;
-            height: 20px;
-            border: 1px solid #369;
+        * {
+            box-sizing: border-box;
+        }
+        .box{
+            position: fixed;
+            left: 50%;
+            transform: translate(-50%);
+            width: 320px;
+            height: 44px;
+            background-color: white;
+            color: #00a0e9;
+            border: 1px solid #00a0e9;
         }
         .process{
             position: absolute;
             height: 100%;
-            width: 5%;
-            background: #369;
+            width: 0;
+            background: #00a0e9;
+            color: white;
             overflow: hidden;
-            animation: play 2s linear infinite alternate both;
+            z-index: 10;
         }
-        .process-note,
-        .process-inner-note{
+        .process-text{
             position: absolute;
-            left: 200px;
+            left: 160px;
             top: 50%;
             font-size: 12px;
             transform: translate(-50%, -50%);
-        }
-        .process-note{
-            color: #333;
-        }
-        .process-inner-note{
-            color: #fff;
-        }
-
-        @keyframes play{
-            from{
-                width: 25%;
-            }
-            to{
-                width: 75%;
-            }
+            white-space: nowrap;
         }
     </style>
+
+    <script>
+        function process() {
+            var t = 1;
+            var max = 320;
+            var progress = document.getElementById("process");
+            var process_texts = document.getElementsByClassName("process-text");
+            var interval = setInterval(function () {
+                if (t == max) {
+                    clearInterval(interval);
+                    for (var i in process_texts){
+                        process_texts[i].innerHTML = '完成'
+                    }
+                } else {
+                    progress.style.width = t + "px";
+                    for (var i in process_texts){
+                        process_texts[i].innerHTML = '进度' + (t / max * 100).toFixed(2) + "%"
+                    }
+                    t++;
+                }
+            }, 10)
+        }
+    </script>
+
 </head>
 <body>
-<div class="bar">
-    <div class="process-note">
-        驾驶的飞机打发时间45%
+
+<div class="box" onclick="process()">
+    <div class="process" id="process">
+        <span class="process-text">点击开始</span>
     </div>
-    <div class="process">
-        <div class="process-inner-note">
-            驾驶的飞机打发时间45%
-        </div>
-    </div>
+    <span class="process-text">点击开始</span>
 </div>
+
 </body>
 </html>
