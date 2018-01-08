@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cmn-hans">
+<head>
+    <meta charset="utf-8">
+    <title>进度条</title>
+    <style type="text/css">
+        .bar{
+            position: relative;
+            width: 400px;
+            height: 20px;
+            border: 1px solid #369;
+        }
+        .process{
+            position: absolute;
+            height: 100%;
+            width: 5%;
+            background: #369;
+            overflow: hidden;
+            animation: play 2s linear infinite alternate both;
+        }
+        .process-note,
+        .process-inner-note{
+            position: absolute;
+            left: 200px;
+            top: 50%;
+            font-size: 12px;
+            transform: translate(-50%, -50%);
+        }
+        .process-note{
+            color: #333;
+        }
+        .process-inner-note{
+            color: #fff;
+        }
+
+        @keyframes play{
+            from{
+                width: 25%;
+            }
+            to{
+                width: 75%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="bar">
+    <div class="process-note">
+        驾驶的飞机打发时间45%
+    </div>
+    <div class="process">
+        <div class="process-inner-note">
+            驾驶的飞机打发时间45%
+        </div>
+    </div>
+</div>
+</body>
+</html>
