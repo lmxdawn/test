@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>掘金骨架屏动画</title>
+    <style>
+        .skeleton-list[data-v-6b4041cd] {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 0 0 .2rem .2rem;
+            overflow: hidden;
+        }
+        .skeleton-list .skeleton-row[data-v-6b4041cd]:first-of-type {
+            width: 40%;
+        }
+
+        .skeleton-list .skeleton-row[data-v-6b4041cd] {
+            margin-bottom: 16px;
+            background: linear-gradient(90deg,#fff,#edeff1,#fff);
+            background-size: 480px 480px;
+            animation: skeleton-stripes-data-v-6b4041cd .6s linear infinite;
+        }
+        .skeleton-row[data-v-6b4041cd] {
+            margin-bottom: .8rem;
+            height: 1.2rem;
+            background-color: #f3f3f3;
+        }
+        .skeleton-list .skeleton-row[data-v-6b4041cd]:nth-of-type(2), .skeleton-list .skeleton-row[data-v-6b4041cd]:nth-of-type(3) {
+            width: 80%;
+        }
+        .skeleton-list .skeleton-row[data-v-6b4041cd]:last-of-type {
+            margin-bottom: 0;
+        }
+        @keyframes skeleton-stripes-data-v-6b4041cd{0%{background-position:0 0}to{background-position:480px 0}}
+    </style>
+</head>
+<body>
+<div class="skeleton-list shadow" data-v-6b4041cd="" data-v-7c5b7d46="">
+    <div class="skeleton-row" data-v-6b4041cd=""></div>
+    <div class="skeleton-row" data-v-6b4041cd=""></div>
+    <div class="skeleton-row" data-v-6b4041cd=""></div>
+</div>
+</body>
+</html>
